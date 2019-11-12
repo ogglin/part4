@@ -1,0 +1,9 @@
+<div *ngFor="let item of options">
+  <mat-checkbox
+    [value]="item.id"
+    [(ngModel)]="item.checked"
+    (change)="onToggle()"
+  >
+    {{item.val}}
+  </mat-checkbox>
+</div>

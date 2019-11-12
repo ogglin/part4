@@ -1,0 +1,6 @@
+<div>
+  <p *ngIf="rValue > 0">{{rValue}}</p>
+  <p *ngIf="rValue === 0">{{options[1].max / 2}}</p>
+  {{options[0].min}} <input type="range" [attr.min]="options[0].min" [attr.max]="options[1].max" step="1"
+         [attr.value]="options[1].max / 2" (change)="onToggle($event)"> {{options[1].max}}
+</div>

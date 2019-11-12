@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "assets/css/reset";
+@import "assets/css/abstracts";
+@import "assets/css/grid";
+@import "assets/css/elements";
+@import "assets/css/options";
+@import "assets/css/catalog";
+
+html, body { height: 100%; }
+body { margin: 0; font: {
+   family: $font-stack; size: $base-font-size;
+  }
+}
+.logotype {
+  width: auto;
+  height: 100px;
+}

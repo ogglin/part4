@@ -1,0 +1,23 @@
+<div [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="filter">
+  <ng-container *ngFor="let caption of captions">
+    <h4>{{caption}}</h4>
+    <ng-container *ngFor="let option of filters">
+      <ng-container *ngIf="caption === option.caption">
+        <h5>{{option.subcaption}}</h5>
+        <ng-container [ngSwitch]="option.type">
+          <ng-container *ngSwitchCase="'radio'">
+              <app-radio-group [options]="option.values" [subId]="option.sub_id" (toggle)="onChangeVals($event)"></app-radio-group>
+          </ng-container>
+          <ng-container *ngSwitchCase="'checkbox'">
+            <app-checkbox-group [options]="option.values" [subId]="option.sub_id" (toggle)="onChangeVals($event)"></app-checkbox-group>
+          </ng-container>
+          <ng-container *ngSwitchCase="'range'">
+            <app-range-group [options]="option.values" [subId]="option.sub_id" (toggle)="onChangeVals($event)"></app-range-group>
+          </ng-container>
+        </ng-container>
+        <div class="errorMessage" *ngIf="!isValid">{{option.subcaption}} is required</div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+  <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" class="m4 m4_t">Применить</button>
+</div>
