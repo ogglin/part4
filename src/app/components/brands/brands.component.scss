@@ -1,0 +1,36 @@
+$lg: 1200px;
+$md: 800px;
+$sm: 640px;
+$p: 10px;
+.nav-brands {
+  padding: 20px 0;
+  .nav-brands-item {
+    padding: 0 $p;
+    img {
+      max-width: 100%;
+    }
+  }
+  a {
+    text-transform: uppercase;
+    font-weight: 600;
+    display: inline-block;
+    position: relative;
+    padding-right: 30px;
+    line-height: 22px;
+    .mat-icon {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+  }
+}
+
+@media screen and (min-width: $sm){
+  .nav-brands-item {width: calc(25% - 20px)}
+}
+@media screen and (min-width: $md){
+  .nav-brands-item {width: calc(20% - 20px)}
+}
+@media screen and (min-width: $lg){
+  .nav-brands-item {width: calc(16.666% - 20px)}
+}

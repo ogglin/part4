@@ -1,0 +1,34 @@
+<header>
+  <div class="container-full">
+    <div class="grid">
+      <div class="grid__row">
+        <div class="grid__item">
+          <a href="/">
+            <img src="assets/img/logo_part4.jpg" alt="logo" class="logotype">
+          </a>
+        </div>
+        <div class="grid__item grow-1">
+        </div>
+        <div class="grid__item">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Main menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>dialpad</mat-icon>
+              <span>Redial</span>
+            </button>
+            <button mat-menu-item disabled>
+              <mat-icon>voicemail</mat-icon>
+              <span>Check voice mail</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>notifications_off</mat-icon>
+              <span>Disable alerts</span>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

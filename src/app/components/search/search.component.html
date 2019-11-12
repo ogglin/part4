@@ -1,0 +1,25 @@
+<div class="search_form">
+  <form [formGroup]="searchForm" (ngSubmit)="handleSearch(40)" (keyup)="handleSearch(20)" class="grid__row">
+    <mat-form-field class="grid__row__item grow-1">
+      <input matInput placeholder="Поиск" type="text" formControlName="searchVal" id="searchForm"/>
+    </mat-form-field>
+    <button type="submit" mat-button color="primary">
+      <mat-icon>search</mat-icon>
+    </button>
+  </form>
+  <ng-container *ngIf="isSearched">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </ng-container>
+</div>
+<ng-container *ngIf="isSearchReady">
+  <div class="search_result">
+    <div class="grid__col">
+      <div class="p2" *ngFor="let item of searchResult">
+        <a href="" (click)="goToDetail(item['detail_id'])">
+          {{item['detail_name']}}
+          <ng-container *ngIf="item['detail_name_ru']"> / {{item['detail_name_ru']}}</ng-container>
+        </a>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,27 @@
+<div class="nav-brands">
+  <div class="container">
+    <div class="grid">
+      <a (click)="openBrands()" class="cursor-pointer">
+        Выбор по брендам:
+        <ng-container *ngIf="!isBrandsOpen">
+          <mat-icon aria-hidden="false" aria-label="close">expand_more</mat-icon>
+        </ng-container>
+        <ng-container *ngIf="isBrandsOpen">
+          <mat-icon aria-hidden="false" aria-label="open">expand_less</mat-icon>
+        </ng-container>
+      </a>
+    </div>
+    <ng-container *ngIf="isBrandsOpen">
+      <div class="grid">
+        <div class="grid__row">
+          <ng-container *ngFor="let brand of Brands">
+            <div class="nav-brands-item">
+              <img src="assets/img/brands/{{brand['logotype']}}" class="img-fluid cursor-pointer"
+                   alt="{{brand['name']}}" (click)="gotoBrand(brand['id'])">
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
