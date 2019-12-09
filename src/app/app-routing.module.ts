@@ -6,7 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 import {SharedModule} from './shared.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import { CatalogComponent } from './components/catalog/catalog.component';
-import {MainFilterComponent} from "./components/main-filter/main-filter.component";
+import {MainFilterComponent} from './components/main-filter/main-filter.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},

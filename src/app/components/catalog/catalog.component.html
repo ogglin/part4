@@ -2,15 +2,15 @@
   <div class="grid">
     <div class="grid__row nowrap">
       <div class="grid__row__item">
-        <h4>Фильтр:</h4>
-        <app-main-filter (filterChange)="filterApply($event)" [brand]="brandId"></app-main-filter>
+          <app-main-filter (filterChange)="filterApply($event)" [brand]="brandId"></app-main-filter>
       </div>
       <div class="grid__row__item">
-        <div class="catalog">
+        <div class="catalog" *ngIf="isLoad">
           <div *ngFor="let model of models;" class="catalog_item">
             <h5>{{model['name']}}</h5>
             <button mat-raised-button color="accent" (click)="goToModel(model['id'])">Выбрать</button>
           </div>
+          <h4 *ngIf="!models.length">По данному фильтру ничего не найдено, измените условия</h4>
         </div>
       </div>
     </div>

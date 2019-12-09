@@ -11,13 +11,14 @@ import {RequestsService} from '../../service/requests.service';
 export class CatalogComponent implements OnInit {
   private routerSubscription: Subscription;
   brandId: number;
-  models: any;
-
+  models: Array<any> = [];
+  isLoad: boolean;
 
   constructor(private aroute: ActivatedRoute, private req: RequestsService) {
   }
 
   ngOnInit() {
+    this.isLoad = false;
     this.routerSubscription = this.aroute.queryParams.subscribe(qP => {
       this.brandId = parseInt(qP.brand, 10);
     });
@@ -32,6 +33,7 @@ export class CatalogComponent implements OnInit {
     this.req.getModels(this.brandId).subscribe(res => {
       this.models = res;
       console.log(this.models);
+      this.isLoad = true;
     });
   }
   filterApply(val) {

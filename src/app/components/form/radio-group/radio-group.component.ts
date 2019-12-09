@@ -14,6 +14,7 @@ export class RadioGroupComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.options);
   }
 
   onToggle(e) {

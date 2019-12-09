@@ -2,6 +2,12 @@
 .text-left {text-align: left}
 .text-right {text-align: right}
 .cursor-pointer {cursor: pointer}
+.w-50 {
+  max-width: 45%;
+  &:first-child {
+    margin-right: 6%;
+  }
+}
 .p1 {
   padding: 0.25em !important;
   &_t {

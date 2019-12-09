@@ -1,23 +1,36 @@
 <div [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="filter">
-  <ng-container *ngFor="let caption of captions">
-    <h4>{{caption}}</h4>
-    <ng-container *ngFor="let option of filters">
-      <ng-container *ngIf="caption === option.caption">
-        <h5>{{option.subcaption}}</h5>
-        <ng-container [ngSwitch]="option.type">
-          <ng-container *ngSwitchCase="'radio'">
-              <app-radio-group [options]="option.values" [subId]="option.sub_id" (toggle)="onChangeVals($event)"></app-radio-group>
+  <ng-scrollbar class="filter_wrap">
+    <div class="brands-list">
+      <h5>Бренды</h5>
+      <ng-container *ngFor="let brand of brands">
+        <app-checkbox [value]="brand.name" [id]="brand.id" [checked]="brand.check"
+                      (toggle)="selectBrand($event)"></app-checkbox>
+      </ng-container>
+    </div>
+
+    <ng-container *ngFor="let caption of captions">
+      <h4>{{caption}}</h4>
+      <ng-container *ngFor="let option of filters">
+        <ng-container *ngIf="caption === option.caption">
+          <h5>{{option.subcaption}}</h5>
+          <ng-container [ngSwitch]="option.type">
+            <ng-container *ngSwitchCase="'radio'">
+              <app-radio-group [options]="option.values" [subId]="option.sub_id"
+                               (toggle)="onChangeVals($event)"></app-radio-group>
+            </ng-container>
+            <ng-container *ngSwitchCase="'checkbox'">
+              <app-checkbox-group [options]="option.values" [subId]="option.sub_id"
+                                  (toggle)="onChangeVals($event)"></app-checkbox-group>
+            </ng-container>
+            <ng-container *ngSwitchCase="'range'">
+              <app-min-max-group [options]="option.values" [subId]="option.sub_id"
+                               (toggle)="onChangeVals($event)"></app-min-max-group>
+            </ng-container>
           </ng-container>
-          <ng-container *ngSwitchCase="'checkbox'">
-            <app-checkbox-group [options]="option.values" [subId]="option.sub_id" (toggle)="onChangeVals($event)"></app-checkbox-group>
-          </ng-container>
-          <ng-container *ngSwitchCase="'range'">
-            <app-range-group [options]="option.values" [subId]="option.sub_id" (toggle)="onChangeVals($event)"></app-range-group>
-          </ng-container>
+          <div class="errorMessage" *ngIf="!isValid">{{option.subcaption}} is required</div>
         </ng-container>
-        <div class="errorMessage" *ngIf="!isValid">{{option.subcaption}} is required</div>
       </ng-container>
     </ng-container>
-  </ng-container>
+  </ng-scrollbar>
   <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" class="m4 m4_t">Применить</button>
 </div>

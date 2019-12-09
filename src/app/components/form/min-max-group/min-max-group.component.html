@@ -1,0 +1,16 @@
+<div class="grid__row">
+  <mat-form-field class="w-50">
+    <input matInput type="number" [attr.min]="options[0].min" [attr.value]="options[0].min"
+           (keyup)="onChange($event, 'min')"
+           (change)="onChange($event, 'min')"
+    >
+    <mat-hint>от</mat-hint>
+  </mat-form-field>
+  <mat-form-field class="w-50">
+    <input matInput type="number" [attr.max]="options[1].max" [attr.value]="options[1].max"
+           (keyup)="onChange($event, 'max')"
+           (change)="onChange($event, 'max')"
+    >
+    <mat-hint>до</mat-hint>
+  </mat-form-field>
+</div>

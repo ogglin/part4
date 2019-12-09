@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {RequestsService} from "../../service/requests.service";
-import {FormGroup} from "@angular/forms";
-import {DynamicFormService} from "../form/dynamic-form.service";
-import {} from "../form/checkbox-group/checkbox-group.component"
+import {RequestsService} from '../../service/requests.service';
+import {FormGroup} from '@angular/forms';
+import {DynamicFormService} from '../form/dynamic-form.service';
+import {} from '../form/checkbox-group/checkbox-group.component';
 
 type Filter = Array<{
   caption: string;
@@ -27,7 +27,8 @@ export class MainFilterComponent implements OnInit {
   filterForm = new FormGroup({});
   fBody: Array<any> = [];
   results: any;
-  brands: any;
+  brands: Array<any> = [];
+  curBrands: Array<number> = [];
   @Input() brand: number;
   @Output() filterChange = new EventEmitter<any>();
 
@@ -42,7 +43,7 @@ export class MainFilterComponent implements OnInit {
 
   ngOnInit() {
     this.req.getFilter(1).subscribe(res => {
-      this.filters = res.sort((a, b) =>{
+      this.filters = res.sort((a, b) => {
         if (a.id > b.id) {
           return 1;
         }
@@ -58,10 +59,28 @@ export class MainFilterComponent implements OnInit {
           this.captions.push(this.filters[i].caption);
         }
       }
+      console.log(this.filters);
     });
+    this.curBrands.push(this.brand);
+    this.req.getBrands().subscribe(
+      result => {
+        let checked: boolean;
+        result.forEach(item => {
+          this.curBrands.forEach(c => {
+            checked = c === item.id;
+          });
+          this.brands.push({
+            id: item.id,
+            name: item.name,
+            check: checked
+          });
+        });
+      }
+    );
   }
 
   onSubmit() {
+    console.log('init');
     let val = '';
     let i = 1;
     this.fBody.forEach(item => {
@@ -72,11 +91,18 @@ export class MainFilterComponent implements OnInit {
       }
       i = i + 1;
     });
-    this.req.applyFilter(val, this.brand).subscribe(result => {
+    this.req.applyFilter(val, this.curBrands).subscribe(result => {
       this.results = result;
       this.filterChange.emit(result);
+      setTimeout(() => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }, 100);
     });
   }
+
   onChangeVals(value) {
     const pos = this.fBody.map(e => e.sub_id).indexOf(value.sub_id);
     if (pos !== -1) {
@@ -85,5 +111,13 @@ export class MainFilterComponent implements OnInit {
       this.fBody.push(value);
     }
     console.log(this.fBody);
+  }
+
+  selectBrand(val) {
+    if (this.curBrands.indexOf(val.id) < 0) {
+      this.curBrands.push(val.id);
+    } else {
+      this.curBrands.splice(this.curBrands.indexOf(val.id), 1);
+    }
   }
 }

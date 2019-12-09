@@ -11,6 +11,10 @@ $sm: 640px;
   }
 }
 .filter {
+  &_wrap {
+    width: 250px;
+    height: calc(100vh - 200px) !important;
+  }
   &__title {
 
   }

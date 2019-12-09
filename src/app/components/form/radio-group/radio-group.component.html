@@ -6,7 +6,9 @@
       [value]="item.id"
       (change)="onToggle($event)"
     >
-      {{item.val}}
+      <ng-container *ngIf="item.val === 'icon yes'">Да</ng-container>
+      <ng-container *ngIf="item.val === 'icon no'">Нет</ng-container>
+      <ng-container *ngIf="item.val !== 'icon no' && item.val !== 'icon yes'">{{item.val}}</ng-container>
     </mat-radio-button>
   </mat-radio-group>
 </div>
